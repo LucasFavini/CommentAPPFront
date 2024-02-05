@@ -1,0 +1,17 @@
+<h1 style="text-align: center;margin:30px; color:#ff4081;"><b>CommentsAPP</b></h1>
+<div class="container">
+    <div>
+        <form [formGroup]="loginForm">
+            <mat-form-field class="example-full-width">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Username" formControlName="userName">
+              </mat-form-field>
+    
+              <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password">
+              </mat-form-field>
+            <button [disabled]="!loginForm.valid" class="opacity" mat-raised-button color="accent" (click)="sendUser()" style="margin-top: 20px;">Enviar</button>
+        </form>
+    </div>   
+</div>

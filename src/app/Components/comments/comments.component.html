@@ -1,0 +1,44 @@
+
+<div class="spinner" *ngIf="showSpinner">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- ACA EN EL NGCLASS LE MANDO EL TAMAÑO -->
+<mat-card [ngClass]="item.subComments.lenght === 0 ? 'matHeight' : ''" class="matCards" *ngFor="let item of (filteredComments$ | async) ?
+ (filteredComments$ | async) : (userAndComments$ | async) let first  = first; let i = index "
+ [@bodyExpansion]="first ? state : null">
+   
+  <mat-card-title> 
+      <div class="commentContainer">
+        <mat-card-content style="font-size: 17px;">{{item.commentValue}}</mat-card-content>
+        <div style="display: flex;">
+          <mat-card-content style="margin-right: 29px;"><b>Posted by:</b> {{item.userName}}</mat-card-content>
+          <mat-card-content><b>Date:</b> {{item.commentDateTime | date}}</mat-card-content>
+        </div>
+      </div>
+    </mat-card-title>
+
+    <div class="commentActions">
+      <span id="showResults" style="cursor: pointer;" *ngIf="item.subComments.length > 0" (click)="collapse(item.commentId)">Mostrar respuestas</span>
+      <span (click)="openDialog(item.commentId)">Responder</span>
+      <span (click)="deleteComment(item.commentId)" *ngIf="item.userId === userInfo.id" style="color: #ff4081;">Eliminar</span>
+    </div>
+   
+    <mat-divider *ngIf="item.subComments.length > 0 && displaySubCommentsId === item.commentId"></mat-divider>
+
+    <ng-container *ngFor="let subItem of item.subComments">
+      <mat-card class="subComment" *ngIf="displaySubCommentsId === item.commentId" [@fadeInOut]>
+        <mat-card-title>
+          <div class="commentContainer">
+            <mat-card-content><b>Posted by:</b> {{subItem.userName}}</mat-card-content>
+            <mat-card-content>{{subItem.commentDateTime | date}}</mat-card-content>
+          </div>
+        </mat-card-title>
+
+        <p><mark *ngIf="subItem.userName !== item.userName"><b>@{{item.userName}}</b></mark> {{subItem.commentValue}}</p>
+        <div class="commentActions">
+          <span (click)="openDialog(item.commentId)">Responder</span>
+          <span (click)="deleteSubComment(item.commentId)" *ngIf="subItem.userName === userInfo.userName" style="color: #ff4081;">Eliminar</span>
+        </div>
+      </mat-card>
+    </ng-container>
+</mat-card>

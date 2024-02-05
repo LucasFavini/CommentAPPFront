@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Insert your answer</h1>
+<div>
+    <form style="margin-top: 10px;" [formGroup]="answerForm">
+      <mat-form-field class="textarea-width">
+        <mat-label>Insert a conversation</mat-label>
+        <textarea matInput formControlName="commentValue"></textarea>
+      </mat-form-field>
+    </form>
+</div>
+<div class="buttons">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="answerForm.value" cdkFocusInitial>Ok</button>
+</div>

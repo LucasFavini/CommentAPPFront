@@ -1,0 +1,15 @@
+<mat-card class="matCard">
+  <div class="container">
+    <form style="margin-top: 10px;" [formGroup]="commentForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Insert a conversation</mat-label>
+        <textarea matInput formControlName="commentValue"></textarea>
+      </mat-form-field>
+    </form>
+      <button [disabled]="!commentForm.valid" mat-button color="accent" (click)="sendComment()" style="margin-top: 10px;">Enviar</button>
+  </div>   
+
+  <div class="commentplace">
+    <app-comments></app-comments>
+  </div>
+</mat-card>

@@ -1,0 +1,57 @@
+.commentContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.matCards{
+    margin: 20px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.matHeight{
+    height: 70px;
+}
+
+.spinner{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.commentActions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .commentActions span {
+    margin: 10px;
+    color: gray;
+    cursor: pointer;
+  }
+  
+  #showResults {
+    margin-right: auto;
+  }
+
+.subComment{
+    width: 90%;
+    margin-top: 2%;
+    margin-left: 7%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.element {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s;
+}
+  
+.element.show {
+    opacity: 1;
+    transition: opacity 0.35s;
+    visibility: visible;
+}
+
+mark{
+    background-color: rgba(255, 64, 129, 0.5);
+}

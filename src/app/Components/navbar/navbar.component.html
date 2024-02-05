@@ -1,0 +1,29 @@
+<mat-toolbar class="header" color="accent">
+    <button (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="userIcon"><mat-icon>supervised_user_circle</mat-icon> {{userName}}</span>
+</mat-toolbar>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+    <mat-nav-list>
+        <mat-list-item>
+            <button *ngIf="filterSearch" (click)="displayFilter()" mat-button><mat-icon>explore</mat-icon> Filter</button>
+            <div *ngIf="filterInput" class="sideNavButtons">
+                <input  [(ngModel)]="searchValue" [formControl]="filterControl" matInput placeholder="Search..." >
+                <button (click)="displayFilter()" matSuffix mat-icon-button aria-label="Clear">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </mat-list-item>
+        <mat-list-item>
+            <button (click)="logOut()" mat-button><mat-icon>exit_to_app</mat-icon> LogOut</button>
+        </mat-list-item>
+    </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content style="margin-top: 20px;">
+        <div>
+            <app-comments-board style="height: 100vh;"></app-comments-board>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

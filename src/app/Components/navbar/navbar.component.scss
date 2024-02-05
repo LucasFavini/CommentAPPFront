@@ -1,0 +1,16 @@
+.header{
+  opacity: 0.7;
+}
+
+.sideNavButtons{
+  display: flex;
+}
+
+.userIcon{
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  mat-icon{
+    margin: 10px;
+  }
+}

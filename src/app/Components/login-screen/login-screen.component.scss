@@ -1,0 +1,15 @@
+  .container {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    form{
+      margin-top: 50px;
+      display: grid;
+    }
+    padding: 20px;
+    box-shadow: 0 0 10px #ff4081;
+  }
+
+  .opacity{
+    opacity: 0.7;
+  }
