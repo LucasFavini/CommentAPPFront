@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, catchError, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, switchMap } from 'rxjs';
 import { CommentService } from 'src/app/services/comment-services.service';
 import { CommentDialogComponent } from '../comment-dialog/comment-dialog.component';
 
@@ -30,6 +30,7 @@ export class CommentsComponent implements OnInit, AfterContentInit {
   usersAndComments = new BehaviorSubject<any[]>([]);
   userInfo:any;
   state: string = 'collapsed';
+  theUserName:any;
 
   showSpinner: boolean = true;
   panelOpenState: boolean = false;
@@ -40,7 +41,6 @@ export class CommentsComponent implements OnInit, AfterContentInit {
   }
 
   get filteredComments$(): Observable<any> {
-    console.log(this.commentService.filteredComments);
     return this.usersAndComments = this.commentService.filteredComments;
   }
 
@@ -53,6 +53,7 @@ export class CommentsComponent implements OnInit, AfterContentInit {
         this.showSpinner = false;
       }, err => { if (err.status === 401) {
         sessionStorage.clear();
+        alert("Se termino la session - Logear nuevamente")
         this.router.navigate(['login']);
     }});
   }
@@ -80,6 +81,7 @@ export class CommentsComponent implements OnInit, AfterContentInit {
       catchError(error => {
         if (error.status === 401) {
           sessionStorage.clear();
+          alert("Se termino la session - Logear nuevamente")
           this.router.navigate(['login']);
         }
         throw error;
@@ -96,6 +98,7 @@ export class CommentsComponent implements OnInit, AfterContentInit {
       catchError(error => {
         if (error.status === 401) {
           sessionStorage.clear();
+          alert("Se termino la session - Logear nuevamente")
           this.router.navigate(['login']);
         }
         throw error;
@@ -103,7 +106,7 @@ export class CommentsComponent implements OnInit, AfterContentInit {
   }
 
   //Ver
-openDialog(commentId: number) {
+openDialog(commentId: number, userName?: string) {
     const userInfo = this.commentService.getUserInfo();
     const dialogReF =  this.dialog.open(CommentDialogComponent, {
       width: '1000px',
@@ -112,6 +115,7 @@ openDialog(commentId: number) {
   dialogReF.afterClosed().subscribe(result => {
     if (result) {
       this.displaySubCommentsId = commentId;
+      result.UserTag = userName;
       this.commentService.addSubComment(result)
       .pipe(
         switchMap(() => this.commentService.getUsersAndComments()))
@@ -121,6 +125,7 @@ openDialog(commentId: number) {
         catchError(error => {
           if (error.status === 401) {
             sessionStorage.clear();
+            alert("Se termino la session - Logear nuevamente")
             this.router.navigate(['login']);
           }
           throw error;

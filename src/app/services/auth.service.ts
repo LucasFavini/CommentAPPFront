@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommentService } from './comment-services.service';
 
@@ -7,18 +6,16 @@ import { CommentService } from './comment-services.service';
 })
 export class AuthService {
 
-  private url = "https://localhost:7141/api"
+  constructor(private commentService: CommentService) { }
 
-  constructor(private http: HttpClient, private commentService: CommentService) { }
-
-  public addUser(){
-    const obj = {
-      name: "front",
-      lastName: "end",
-      userCreation: "2024-01-24T16:56:04.726Z"
-    }
-    this.http.post(`${this.url}/AddUser`,obj)
-  }
+  // public addUser(){
+  //   const obj = {
+  //     name: "front",
+  //     lastName: "end",
+  //     userCreation: "2024-01-24T16:56:04.726Z"
+  //   }
+  //   this.http.post(`${this.url}/AddUser`,obj)
+  // }
 
   public login(){
     const obj = {
