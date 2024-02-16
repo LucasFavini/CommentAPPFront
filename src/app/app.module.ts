@@ -14,7 +14,8 @@ import { CommentsBoardComponent } from './Components/comments-board/comments-boa
 import { LoginScreenComponent } from './Components/login-screen/login-screen.component';
 import { CommentsComponent } from './Components/comments/comments.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
-import { CommentDialogComponent } from './Components/comment-dialog/comment-dialog.component';
+import { CommentDialogComponent } from './Components/Dialogs/comment-dialog/comment-dialog.component';
+import { AddUserDialogComponent } from './Components/Dialogs/add-user-dialog/add-user-dialog.component';
 
 const routes: Routes = [
   { path : 'login', component: LoginScreenComponent, canActivate: [LoginGuard]},
@@ -30,6 +31,7 @@ const routes: Routes = [
     CommentsComponent,
     NavbarComponent,
     CommentDialogComponent,
+    AddUserDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

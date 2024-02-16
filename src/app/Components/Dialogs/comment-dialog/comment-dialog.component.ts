@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { noWhitespaceValidator } from 'src/app/common/noWhiteSpacesValidator';
 
 @Component({
   selector: 'app-comment-dialog',
@@ -18,7 +19,7 @@ export class CommentDialogComponent implements OnInit {
     this.answerForm = this.formBuilder.group({
       userName: this.data.userName,
       commentId: this.data.commentId,
-      commentValue:['', Validators.required],
+      commentValue:['', [Validators.required], [noWhitespaceValidator]],
       commentDateTime: new Date()
     })
   }

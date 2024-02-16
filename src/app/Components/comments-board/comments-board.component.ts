@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, switchMap } from 'rxjs';
+import { noWhitespaceValidator } from 'src/app/common/noWhiteSpacesValidator';
 import { CommentService } from 'src/app/services/comment-services.service';
 
 
@@ -24,7 +25,7 @@ export class CommentsBoardComponent implements OnInit {
   ngOnInit(): void {
     this.commentForm = this.formBuilder.group({
       userId: this.userInfo.id,
-      commentValue:['', Validators.required],
+      commentValue: ['', [Validators.required], [noWhitespaceValidator]],
       commentDateTime: new Date()
     })
   }

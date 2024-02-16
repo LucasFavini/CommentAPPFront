@@ -2,11 +2,17 @@
     <button (click)="drawer.toggle()" mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
-    <span class="userIcon"><mat-icon>supervised_user_circle</mat-icon> {{userName}}</span>
+    <span class="userIcon"><mat-icon>account_circle</mat-icon> {{userName}} </span>
+    <span *ngIf="isUserAdmin" style="margin: 10px; color: yellowgreen; font-size: small;"><b>• ADMIN</b></span>
 </mat-toolbar>
 <mat-drawer-container autosize>
     <mat-drawer #drawer opened="true" mode="side" position="start">
     <mat-nav-list>
+        <mat-list-item>
+            <button mat-button (click)="openAddUserDialog()"><mat-icon>supervised_user_circle</mat-icon> AddUser</button>
+            <div *ngIf="filterInput" class="sideNavButtons">
+            </div>      
+        </mat-list-item>
         <mat-list-item>
             <button *ngIf="filterSearch" (click)="displayFilter()" mat-button><mat-icon>explore</mat-icon> Filter</button>
             <div *ngIf="filterInput" class="sideNavButtons">

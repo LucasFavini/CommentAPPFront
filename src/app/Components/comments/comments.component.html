@@ -20,7 +20,7 @@
     <div class="commentActions">
       <span id="showResults" style="cursor: pointer;" *ngIf="item.subComments.length > 0" (click)="collapse(item.commentId)">Mostrar respuestas</span>
       <span (click)="openDialog(item.commentId, undefined)">Responder</span>
-      <span (click)="deleteComment(item.commentId)" *ngIf="item.userId === userInfo.id" style="color: #ff4081;">Eliminar</span>
+      <span (click)="deleteComment(item.commentId)" *ngIf="item.userId === userInfo.id || userInfo.isAdmin" style="color: #ff4081;">Eliminar</span>
     </div>
    
     <mat-divider *ngIf="item.subComments.length > 0 && displaySubCommentsId === item.commentId"></mat-divider>
@@ -37,7 +37,7 @@
         <p><mark *ngIf="subItem.userName !== item.userName"><b>{{subItem.userName === subItem.userTag ? '' : '@'+(subItem.userTag || item.userName) }}</b></mark> {{subItem.commentValue}}</p>
         <div class="commentActions">
           <span (click)="openDialog(item.commentId, subItem.userName)">Responder</span>
-          <span (click)="deleteSubComment(item.commentId)" *ngIf="subItem.userName === userInfo.userName" style="color: #ff4081;">Eliminar</span>
+          <span (click)="deleteSubComment(item.commentId)" *ngIf="subItem.userName === userInfo.userName || userInfo.isAdmin" style="color: #ff4081;">Eliminar</span>
         </div>
       </mat-card>
     </ng-container>

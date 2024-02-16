@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { noWhitespaceValidator } from 'src/app/common/noWhiteSpacesValidator';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment-services.service';
 
@@ -23,8 +24,8 @@ export class LoginScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      userName:['', Validators.required],
-      password:['', Validators.required],
+      userName:['', [Validators.required], [noWhitespaceValidator]],
+      password:['', [Validators.required]],
     })
   }
 
@@ -32,7 +33,7 @@ export class LoginScreenComponent implements OnInit {
     this.commentService.loginMethod(this.loginForm.value).subscribe(response => {
       if (response.token) {
         this.authService.storeToken(response.token);
-        this.commentService.storageUserInfo({userName: response.userName, id: response.id});
+        this.commentService.storageUserInfo({userName: response.userName, id: response.id, isAdmin: response.isAdmin});
         this.router.navigate(['commentsboard'])
       }
       else{

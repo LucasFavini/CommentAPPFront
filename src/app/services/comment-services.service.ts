@@ -16,6 +16,10 @@ export class CommentService {
   constructor(private http: HttpClient) {
   }
 
+  public addUser(userAdminId: number, newUser: any):Observable<any>{
+    return this.http.post(`${this.url}/Users/AddUser?userAdminId=${userAdminId}`,newUser);
+  }
+
   public getUsersAndComments(): Observable<any>{
     return this.http.get<any>(`${this.url}/Users/GetUsersAndComments`); 
   }

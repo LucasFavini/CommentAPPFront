@@ -9,5 +9,5 @@
 </div>
 <div class="buttons">
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="answerForm.value" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="answerForm.value" [disabled]="!answerForm.valid" cdkFocusInitial>Ok</button>
 </div>

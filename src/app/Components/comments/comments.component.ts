@@ -1,10 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, map, switchMap } from 'rxjs';
 import { CommentService } from 'src/app/services/comment-services.service';
-import { CommentDialogComponent } from '../comment-dialog/comment-dialog.component';
+import { CommentDialogComponent } from '../Dialogs/comment-dialog/comment-dialog.component';
 
 @Component({
   selector: 'app-comments',
@@ -125,7 +125,7 @@ openDialog(commentId: number, userName?: string) {
         catchError(error => {
           if (error.status === 401) {
             sessionStorage.clear();
-            alert("Se termino la session - Logear nuevamente")
+            alert("Session ended - logIn again")
             this.router.navigate(['login']);
           }
           throw error;

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { BehaviorSubject, filter, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { CommentService } from 'src/app/services/comment-services.service';
+import { AddUserDialogComponent } from '../Dialogs/add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +13,24 @@ import { CommentService } from 'src/app/services/comment-services.service';
 })
 export class NavbarComponent implements OnInit {
 
-  badgevisible: boolean = false;
   filterControl: FormControl = new FormControl('');
   filteredList: any = new BehaviorSubject<any>(null);
+
+  badgevisible: boolean = false;
+  isUserAdmin: boolean = false;
   filterInput: boolean = false;
   filterSearch: boolean = true;
+
+  userInfo: any;
   searchValue: string = '';
   userName: string= '';
 
-  constructor(private router: Router, private commentService: CommentService){ }
+  constructor(private router: Router, private commentService: CommentService, private dialog: MatDialog){ }
 
   ngOnInit(): void {
-    const userInfo = JSON.parse(sessionStorage.getItem('userInfo') || '');
-    this.userName = userInfo?.userName;
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo') || '');
+    this.userName = this.userInfo?.userName;
+    this.isUserAdmin = this.userInfo.isAdmin;
     this.filterList();
   }
 
@@ -40,6 +47,19 @@ export class NavbarComponent implements OnInit {
 
   badgevisibility() {
     this.badgevisible = true;
+  }
+
+  openAddUserDialog(){
+    if (this.isUserAdmin) {
+    this.dialog.open(AddUserDialogComponent,{
+        width: '400px',
+        height: '300px',
+        data: {id: this.userInfo.id}
+      })
+    }else{
+      alert('User is not Admin')
+    }
+    // const dialogRef = this.dialog.open()
   }
 
   private filterList(){

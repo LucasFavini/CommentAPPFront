@@ -1,0 +1,20 @@
+<h2>Add a new User:</h2>
+<div class="container">
+    <form style="margin-top: 10px;" [formGroup]="answerForm">
+        <mat-form-field class="example-full-width">
+            <mat-label>Account username will be:</mat-label>
+            <input matInput placeholder="Username" formControlName="userName">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Account password will be:</mat-label>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+          <mat-radio-group style="display: flex;
+          justify-content: space-evenly;" formControlName="isAdminUser">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false" [checked]="true">No</mat-radio-button>
+          </mat-radio-group>
+          <button (click)="createNewUser()" class="opacity" mat-raised-button color="accent" style="margin-top: 20px;">Send</button>
+    </form>
+</div>
